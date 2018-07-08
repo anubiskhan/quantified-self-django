@@ -1,7 +1,11 @@
-from django.urls import path
-
+from django.conf.urls import url
 from . import views
 
+
 urlpatterns = [
-    path('foods/', views.food_index, name='food_index')
+    url(
+        r'^api/v1/foods/$',
+        views.get_foods,
+        name='get_foods'
+    )
 ]
