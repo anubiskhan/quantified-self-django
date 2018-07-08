@@ -1,8 +1,12 @@
-from django.shortcuts import render
-from django.http import JsonResponse
-from ./models.py import Food
-import json
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+from .models import Food
+from .serializers import FoodSerializer
 
-# Create your views here.
-def food_index(request):
-    return JsonResponse(Food.objects.all())
+@api_view(['GET'])
+def get_foods(request):
+    # get all foods
+    foods = Food.objects.all()
+    serializer = FoodSerializer(foods, many=True)
+    return Response(serializer.data)
