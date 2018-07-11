@@ -10,3 +10,11 @@ def get_foods(request):
     foods = Food.objects.all()
     serializer = FoodSerializer(foods, many=True)
     return Response(serializer.data)
+@api_view(['POST'])
+def post_food(request):
+    # post a new food
+    name = request.data["food"]["name"]
+    calories = request.data["food"]["calories"]
+    food = Food.objects.create(name = name, calories = calories)
+    serializer = FoodSerializer(food, many=False)
+    return Response(serializer.data)
