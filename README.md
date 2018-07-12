@@ -1,5 +1,5 @@
 # Quantified Self (Django)
-  This application is an API designed to handle the backend processes of a frontend 'meal and food manager' called [Quantified Self Front End](https://github.com/anubiskhan/qs_frontend_django). The frontend is deployed via [GitHub Pages](https://anubiskhan.github.io/qs_frontend_django/), while the backend is hosted on an instance of Heroku. MY [Heroku App](https://serene-savannah-88118.herokuapp.com/api/v1/foods/api/v1/foods) instance.
+  This application is an API designed to handle the backend processes of a frontend 'meal and food manager' called [Quantified Self Front End](https://github.com/anubiskhan/qs_frontend_django). The frontend is deployed via [GitHub Pages](https://anubiskhan.github.io/qs_frontend_django/), while the backend is hosted on an instance of Heroku. MY [Heroku App](https://serene-savannah-88118.herokuapp.com/api/v1/foods/) instance.
 
   It is essentially a collection of endpoints that provide CRUD functionality for Food, and psuedo-CRUD functionality for Meals. (An end user cannot create or destroy meals, but is able to create associations between pre-seeded meals and foods).
 
