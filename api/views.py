@@ -51,7 +51,7 @@ class FoodsView(viewsets.ViewSet):
 class MealsView(viewsets.ViewSet):
     def list(self, request):
         # get all meals
-        meals = get_object_or_404(Meal, id=meal_id)
+        meals = Meal.objects.all()
         serializer = MealSerializer(meals, many=True)
         return Response(serializer.data)
 
