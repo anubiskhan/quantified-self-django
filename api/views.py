@@ -5,6 +5,7 @@ from .models import Food, Meal
 from .serializers import FoodSerializer, MealSerializer
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
+import json
 
 class FoodsView(viewsets.ViewSet):
     def list(self, request):
@@ -68,12 +69,12 @@ class MealFoodsView(viewsets.ViewSet):
         food = get_object_or_404(Food, id=food_id)
         meal.foods.add(food)
         message = f'Successfully added {food.name} to {meal.name}'
-        return HttpResponse(message, status=201)
+        return HttpResponse(json.dumps(message), status=201)
 
     def destroy(self, request, meal_id, food_id):
         # remove a food from a meal
         meal = get_object_or_404(Meal, id=meal_id)
         food = get_object_or_404(Food, id=food_id)
         meal.foods.remove(food)
-        message = f'Successfully removed {food.name} to {meal.name}'
-        return HttpResponse(message, status=202)
+        message = f'Successfully removed {food.name} from {meal.name}'
+        return HttpResponse(json.dumps(message), status=202)
