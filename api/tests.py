@@ -20,6 +20,36 @@ class FoodApiTest(TestCase):
         self.assertEqual(json.loads(response.content)[1]['name'], 'Darsh')
         self.assertEqual(json.loads(response.content)[1]['calories'], 123)
 
+    def test_single_food_endpoint_success(self):
+        response = client.get('/api/v1/foods/1')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(json.loads(response.content)['name'], 'Garsh')
+
+    def test_single_food_endpoint_failure(self):
+        response = client.get('/api/v1/foods/3')
+        self.assertEqual(response.status_code, 404)
+
+    def test_post_food_endpoint_success(self):
+        response = client.post('/api/v1/foods/', '{ "food": { "name": "Blorsh", "calories": "66"} }', content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(json.loads(response.content)['name'], 'Blorsh')
+        self.assertEqual(json.loads(response.content)['calories'], 66)
+
+    def test_post_food_endpoint_failure(self):
+        response = client.post('/api/v1/foods/', '{ "food": { "name": "Blorsh"} }', content_type='application/json')
+        self.assertEqual(response.status_code, 400)
+
+    def test_patch_food_endpoint_success(self):
+        response = client.patch('/api/v1/foods/1', '{ "food": { "name": "Blorsh", "calories": "66"} }', content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(json.loads(response.content)['name'], 'Blorsh')
+        self.assertEqual(json.loads(response.content)['calories'], 66)
+
+    def test_patch_food_endpoint_failure(self):
+        response = client.patch('/api/v1/foods/1', '{ "food": { "name": "Blorsh"} }', content_type='application/json')
+        self.assertEqual(response.status_code, 400)
+
+
 class MealApiTest(TestCase):
     def setUp(self):
         Meal.objects.create(name='Breakfast')
