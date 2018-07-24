@@ -49,6 +49,14 @@ class FoodApiTest(TestCase):
         response = client.patch('/api/v1/foods/1', '{ "food": { "name": "Blorsh"} }', content_type='application/json')
         self.assertEqual(response.status_code, 400)
 
+    def test_delete_food_endpoint_success(self):
+        response = client.delete('/api/v1/foods/1')
+        self.assertEqual(response.status_code, 204)
+
+    def test_delete_food_endpoint_failure(self):
+        response = client.delete('/api/v1/foods/111')
+        self.assertEqual(response.status_code, 404)
+
 
 class MealApiTest(TestCase):
     def setUp(self):
