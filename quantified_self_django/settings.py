@@ -84,11 +84,34 @@ REST_FRAMEWORK = {
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
+# DATABASES = {
+#     'test': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'qs_django',
+#         'USER': 'anubiskhan',
+#         'PASSWORD': '',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432'
+#     }
+# }
+#
+# env = os.environ.copy()
+# db_url = env.get('QS_DJANGO_DATABASE_URL', False)
+#
+# if db_url != False:
+#     DATABASES['default'] =  dj_database_url.config()
+
+# Production database
 DATABASES = {
     'default': dj_database_url.config(
         default=os.environ.get('QS_DJANGO_DATABASE_URL')
     )
 }
+
+# Configuration for test database
+import sys
+if 'test' in sys.argv or 'test_coverage' in sys.argv: #Covers regular testing and django-coverage
+    DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
